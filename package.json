@@ -3,7 +3,7 @@
   "displayName": "CMake Tools",
   "description": "Forked - Extended CMake support in Visual Studio Code",
   "version": "1.14.0",
-  "publisher": "eseiler",
+  "publisher": "ms-vscode",
   "repository": {
     "type": "git",
     "url": "https://github.com/eseiler/vscode-cmake-tools"
