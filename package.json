@@ -2,7 +2,7 @@
   "name": "cmake-tools",
   "displayName": "CMake Tools",
   "description": "Forked - Extended CMake support in Visual Studio Code",
-  "version": "100.0.0",
+  "version": "100.0.1",
   "publisher": "ms-vscode",
   "repository": {
     "type": "git",
