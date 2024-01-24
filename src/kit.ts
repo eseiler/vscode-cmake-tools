@@ -60,7 +60,7 @@ export interface CMakeGenerator {
     platform?: string;
 }
 
-type CompilerVendorEnum = 'Clang' | 'GCC' | 'MSVC';
+type CompilerVendorEnum = 'Clang' | 'GCC' | 'MSVC' | 'IntelLLVM';
 
 export interface KitDetect {
     /**
@@ -178,9 +178,12 @@ export async function getCompilerVersion(vendor: CompilerVendorEnum, binPath: st
     if (vendor === 'Clang') {
         version_re = /^(?:Apple LLVM|.*clang) version ([^\s-]+)(?:[\s-]|$)/mgi;
         version_match_index = 1;
-    } else {
+    } else if (vendor == 'GCC') {
         version_re = /^gcc(-| )version (.*?) .*/mgi;
         version_match_index = 2;
+    } else {
+        version_re = /^Intel.*Compiler (.*?) .*/mgi;
+        version_match_index = 1;
     }
 
     let target: TargetTriple | undefined;
@@ -267,6 +270,8 @@ export async function getKitDetect(kit: Kit): Promise<KitDetect> {
             vendor = 'GCC';
         } else if (kit.name.startsWith('Clang ')) {
             vendor = 'Clang';
+        } else if (kit.name.startsWith('IntelLLVM ')) {
+            vendor = 'IntelLLVM';
         }
         if (vendor === undefined) {
             return kit;
